@@ -109,28 +109,6 @@ dictionary.exe
 
 ---
 
-# Why Delete Operation is Important
-
-A user may accidentally enter an incorrect word such as:
-
-```text
-uglyy
-```
-
-instead of:
-
-```text
-ugly
-```
-
-Edit operation can only modify the details inside an existing word entry.
-
-Delete operation is required to completely remove incorrect entries and re-add them properly.
-
-It also demonstrates all three Binary Search Tree deletion cases which is an important DSA concept.
-
----
-
 # Concepts Used
 
 - Binary Search Tree Operations
