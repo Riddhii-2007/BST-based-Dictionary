@@ -1,12 +1,17 @@
-# BST-based-Dictionary
 # BST-Based Dictionary
 
 ### A Console Application powered by Binary Search Tree | C++
 
 **Vardhaman College of Engineering — CSE Department — Summer Project 2025–26**
 
-## Team
-- **Team Lead:** Rendla Vishnu Tej
+---
+
+# Team
+
+## Team Lead
+- Rendla Vishnu Tej
+
+## Members
 - Araveti Harika
 - Paspula Akshith
 - Nagulapally Manideep
@@ -21,51 +26,34 @@
 
 A fully functional dictionary application that runs in the terminal.
 
-All word storage and retrieval is powered by a self-built Binary Search Tree (BST) in C++.
+All word storage and retrieval is powered by a self-built Binary Search Tree (BST) implemented in C++.
 
----
-
-# How to Compile & Run
-
-## Requirements
-- C++ Compiler (GCC / Code::Blocks / VS Code)
-
-## Compile
-
-```bash
-g++ -o dictionary main.cpp
-```
-
-## Run
-
-```bash
-./dictionary
-```
+The project demonstrates practical usage of Data Structures and File Handling concepts through a real-world console application.
 
 ---
 
 # Features
 
-1. Add Word — with definition, word type, synonyms, phonetic  
-2. Search Word — displays full word details  
-3. Delete Word — BST deletion (all 3 cases)  
-4. Display All Words — alphabetical order via BST in-order traversal  
-5. Count Total Words — total entries in dictionary  
-6. Word Type — Noun, Verb, Adjective, Adverb etc.  
-7. Synonyms — related words shown on every search  
-8. Search History — recent searches via Stack  
-9. Auto-Complete — type first few letters, get instant suggestions  
-10. Save / Load — dictionary saves to file on exit, loads on startup  
-11. Edit Word — fix definition, type, synonyms, or phonetic  
-12. Duplicate Alert — warns if word already exists and offers edit  
-13. Spell Suggestion — suggests closest match if word not found  
+1. Add Word — with definition, word type, synonyms, and phonetic
+2. Search Word — displays complete word details
+3. Delete Word — supports all 3 BST deletion cases
+4. Display All Words — alphabetical order using BST in-order traversal
+5. Count Total Words — shows total entries in dictionary
+6. Word Type — noun, verb, adjective, adverb, etc.
+7. Synonyms — related words shown during search
+8. Search History — recent searches stored using Stack
+9. Auto-Complete — instant suggestions using word prefix
+10. Save / Load — automatic file saving and loading
+11. Edit Word — modify definition, type, synonyms, or phonetic
+12. Duplicate Alert — warns if word already exists
+13. Spell Suggestion — suggests closest matching word
 
 ---
 
 # Data Structures Used
 
 - Binary Search Tree (BST) — core storage and retrieval
-- Stack — search history
+- Stack — search history management
 
 ---
 
@@ -84,23 +72,106 @@ dictionary/
 
 ---
 
-# How the App Works
+# How to Compile & Run
 
-1. App starts and loads dictionary data from file
-2. User selects an option from the menu
-3. Operations are performed on BST in memory
-4. On exit, data is automatically saved
-5. Next session restores previous dictionary
+## Requirements
+- C++ Compiler (GCC / Code::Blocks / VS Code)
+
+## Compile
+
+```bash
+g++ -o dictionary main.cpp BST.cpp Dictionary.cpp
+```
+
+## Run
+
+### Linux / Mac
+
+```bash
+./dictionary
+```
+
+### Windows
+
+```bash
+dictionary.exe
+```
 
 ---
 
-# Why Delete in a Dictionary?
+# How the Application Works
 
-A user may accidentally enter an incorrect word (example: `uglyy` instead of `ugly`).
+1. The application starts and automatically loads saved dictionary data from file.
+2. User selects an operation from the menu.
+3. All operations are performed on the BST stored in memory.
+4. Before exiting, the dictionary is automatically saved to file.
+5. During the next launch, all previous data is restored.
 
-Edit can only modify details inside an entry, not the actual word itself.
+---
 
-Delete allows removal of incorrect entries and supports all 3 BST deletion cases, making it an important DSA implementation feature.
+# Why Delete Operation is Important
+
+A user may accidentally enter an incorrect word such as:
+
+```text
+uglyy
+```
+
+instead of:
+
+```text
+ugly
+```
+
+Edit operation can only modify the details inside an existing word entry.
+
+Delete operation is required to completely remove incorrect entries and re-add them properly.
+
+It also demonstrates all three Binary Search Tree deletion cases which is an important DSA concept.
+
+---
+
+# Concepts Used
+
+- Binary Search Tree Operations
+  - Insertion
+  - Searching
+  - Deletion
+  - In-order Traversal
+
+- Stack Operations
+  - Push
+  - Pop
+  - Display History
+
+- File Handling
+  - Read from file
+  - Write to file
+
+- String Manipulation
+- Menu Driven Programming
+- Object-Oriented Programming in C++
+
+---
+
+# Future Improvements
+
+- GUI version using Qt or Java Swing
+- User authentication system
+- Multiple dictionary support
+- Advanced spell checker
+- Word pronunciation audio
+- Export dictionary to PDF
+
+---
+
+# Sample Use Cases
+
+- Student vocabulary learning
+- Mini offline dictionary
+- DSA project demonstration
+- BST operation visualization
+- File handling practice project
 
 ---
 
