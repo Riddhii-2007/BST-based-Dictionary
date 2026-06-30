@@ -1,0 +1,30 @@
+adaptability|The ability to adjust to new conditions or situations.|N|/əˌdæp.təˈbɪl.ə.ti/|flexibility,versatility
+algorithm|A step-by-step procedure for solving a problem.|N|/ˈæl.ɡə.rɪ.ðəm/|procedure,method
+communication|The exchange of information or ideas.|N|/kəˌmjuː.nɪˈkeɪ.ʃən/|interaction,discussion
+containerization|Packaging software with dependencies into containers.|N|/kənˌteɪ.nə.raɪˈzeɪ.ʃən/|packaging,deployment
+cynosure|A person or thing attracting attention or admiration.|N|/ˈsaɪ.nə.ʃʊər/|center of attention,attraction
+deadlock|Situation where processes wait indefinitely for resources.|N|/ˈded.lɒk/|standstill,stalemate
+encapsulation|Bundling data and methods into a single unit.|N|/ɪnˌkæp.sjəˈleɪ.ʃən/|packaging,wrapping
+ethereal|Extremely delicate or heavenly in appearance.|Adj|/ɪˈθɪə.ri.əl/|heavenly,delicate
+euphoria|A feeling of intense happiness or excitement.|N|/juːˈfɔː.ri.ə/|elation,bliss
+framework|A reusable platform for software development.|N|/ˈfreɪm.wɜːk/|structure,platform
+integrity|Honesty and strong moral principles.|N||honesty,ethics
+leadership|The act of guiding or influencing others.|N|/ˈliː.də.ʃɪp/|guidance,management
+nostalgia|Sentimental longing for the past.|N|/nɒˈstæl.dʒə/|remembrance,yearning
+optimism|Hopefulness and confidence about the future|N|/ˈɒp.tɪ.mɪ.zəm/|positivity,confidence
+perplexed|Completely confused or puzzled.|Adj|/pəˈplekst/|confused,baffled
+perseverance|Continuing despite difficulties or obstacles.|N||persistence,endurance
+pessimism|The tendency to expect negative outcomes.|N||negativity,doubt
+polymorphism|The ability of an object to take multiple forms.|N|/ˌpɒl.iˈmɔː.fɪ.zəm/|versatility,flexibility
+pragmatic|Dealing with things practically and realistically.|Adj|/præɡˈmæt.ɪk/|practical,sensible
+procrastination|The act of delaying tasks unnecessarily.|N||delay,postponement
+repository|Central location for storing code or files.|N|/rɪˈpɒz.ɪ.tər.i/|archive,storage
+resilience|The ability to recover quickly from difficulties.|N||toughness,adaptability
+scalability|Ability of a system to handle increased workload.|N|/ˌskeɪ.ləˈbɪl.ə.ti/|expandability,growth
+serendipity|The occurrence of pleasant events by chance.|N|/ˌser.ənˈdɪp.ə.ti/|fortune,luck
+serialization|Converting data structures into a storable format.|N|/ˌsɪə.ri.ə.laɪˈzeɪ.ʃən/|encoding,conversion
+solitude|The state of being alone without loneliness.|N|/ˈsɒl.ɪ.tjuːd/|isolation,seclusion
+starvation|Process unable to obtain required resources indefinitely|N|/stɑːˈveɪ.ʃən/|deprivation,neglect
+success|The act of delaying tasks unnecessarily.|N||delay,postponement
+throughput|Amount of work completed in a given time.|N|/ˈθruː.pʊt/|performance,capacity
+vellichor|The strange wistfulness felt in used bookstores.|N|/ˈvel.ɪ.kɔːr/|nostalgia,longing

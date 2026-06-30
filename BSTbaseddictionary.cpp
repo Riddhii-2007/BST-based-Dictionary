@@ -102,6 +102,19 @@ vector<string> split(const string& s, char delim) {
     return tokens;
 }
 
+// Like split(), but keeps empty fields. Needed for parsing the
+// pipe-delimited save file, where an empty phonetic or synonyms
+// field must NOT shift the remaining columns to the left.
+vector<string> splitKeepEmpty(const string& s, char delim) {
+    vector<string> tokens;
+    stringstream ss(s);
+    string token;
+    while (getline(ss, token, delim)) {
+        tokens.push_back(trim(token));
+    }
+    return tokens;
+}
+
 int editDistance(const string& a, const string& b) {
     int m = (int)a.size(), n = (int)b.size();
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
@@ -148,11 +161,6 @@ class BST {
 private:
     Node* root;
 
-    // ----------------------------------------------------------
-    // [FIX 2] insert() — returns false (duplicate) directly
-    // instead of relying on a pre-search from the public method.
-    // A single O(log n) traversal handles both cases.
-    // ----------------------------------------------------------
     Node* insert(Node* node, const WordEntry& e, bool& inserted) {
         if (!node) {
             inserted = true;
@@ -218,41 +226,20 @@ private:
         return node;
     }
 
-    // ----------------------------------------------------------
-    // [FIX 1 — REVISED]  collectByPrefix()
-    // Collects all words that start with 'prefix' in a single
-    // root-to-leaf pass using lexicographic range pruning.
-    //
-    // Key insight: all words sharing prefix "ap" lie in the
-    // BST range ["ap", "aq") — i.e. >= "ap" and < "aq".
-    // upperBound = prefix with its last character incremented.
-    //
-    //   if nodeWord >= upperBound → prune right, explore left only
-    //   if nodeWord <  prefix    → prune left,  explore right only
-    //   otherwise                → node is in range; explore both
-    //
-    // This correctly handles the case where a matching ancestor
-    // node sits ABOVE a deeper matching subtree, which the
-    // previous findPrefixNode + collectSubtree approach missed.
-    // Complexity: O(log n + m) where m = matching words.
-    // ----------------------------------------------------------
     void collectByPrefix(Node* node, const string& prefix,
                          const string& upperBound,
                          vector<string>& results) const {
         if (!node) return;
         const string& nw = node->data.word;
 
-        // Entire right subtree exceeds prefix range — only go left
         if (nw >= upperBound) {
             collectByPrefix(node->left, prefix, upperBound, results);
             return;
         }
-        // This node and entire left subtree are before prefix — only go right
         if (nw < prefix) {
             collectByPrefix(node->right, prefix, upperBound, results);
             return;
         }
-        // Node is in [prefix, upperBound) — explore both sides
         collectByPrefix(node->left, prefix, upperBound, results);
         size_t pLen = prefix.size();
         if (nw.size() >= pLen && nw.substr(0, pLen) == prefix)
@@ -260,12 +247,9 @@ private:
         collectByPrefix(node->right, prefix, upperBound, results);
     }
 
-    // ----------------------------------------------------------
-    // [FIX 3] closest() — added early-exit when bestDist == 0
-    // ----------------------------------------------------------
     void closest(Node* node, const string& key,
                  string& bestWord, int& bestDist) const {
-        if (!node || bestDist == 0) return;   // <-- early-exit added
+        if (!node || bestDist == 0) return;
         int d = editDistance(key, node->data.word);
         if (d < bestDist) {
             bestDist = d;
@@ -293,11 +277,6 @@ public:
         return n ? &n->data : nullptr;
     }
 
-    // ----------------------------------------------------------
-    // [FIX 2] public insert() — single O(log n) pass.
-    // The old version called search() first (1 traversal) then
-    // insert() (2nd traversal), doubling the cost unnecessarily.
-    // ----------------------------------------------------------
     bool insert(const WordEntry& e) {
         bool inserted = false;
         root = insert(root, e, inserted);
@@ -326,19 +305,11 @@ public:
 
     int getHeight() const { return height(root); }
 
-    // ----------------------------------------------------------
-    // [FIX 1] autoComplete() — true O(log n + m).
-    // Builds an upper bound string (prefix last-char++) to define
-    // the lexicographic range [prefix, upperBound), then uses
-    // collectByPrefix() to gather all matching words in one pass
-    // from root, pruning branches outside the range.
-    // ----------------------------------------------------------
     vector<string> autoComplete(const string& prefix) const {
         vector<string> results;
         string p = toLower(prefix);
         if (p.empty()) return results;
 
-        // Upper bound: e.g. "ap" -> "aq"  |  "z" -> "{"
         string upper = p;
         upper.back()++;
 
@@ -394,14 +365,17 @@ private:
         int loaded = 0;
         while (getline(file, line)) {
             if (trim(line).empty()) continue;
-            auto parts = split(line, '|');
+            auto parts = splitKeepEmpty(line, '|');
+            // A line with no synonyms (trailing "|") may not produce
+            // a 5th token via getline — pad it so indexing is safe.
+            while (parts.size() < 5) parts.push_back("");
             if (parts.size() < 4) continue;
             WordEntry e;
             e.word       = toLower(trim(parts[0]));
             e.definition = trim(parts[1]);
             e.wordType   = trim(parts[2]);
             e.phonetic   = trim(parts[3]);
-            if (parts.size() >= 5)
+            if (!parts[4].empty())
                 e.synonyms = split(parts[4], ',');
             bst.insert(e);
             loaded++;
@@ -455,7 +429,6 @@ private:
         cout << RESET << "\n";
     }
 
-    // Display Menu UI
     void displayMenu() {
         cout << "\n";
 
@@ -501,7 +474,6 @@ public:
 
     ~Dictionary() {}
 
-    // Feature 1: Add Word
     void addWord() {
         printHeader("ADD WORD");
         string word = toLower(getLine("Enter word          : "));
@@ -527,7 +499,6 @@ public:
         cout << GREEN << "\n  [✓] '" << word << "' added successfully!\n" << RESET;
     }
 
-    // Feature 2: Search Word
     void searchWord() {
         printHeader("SEARCH WORD");
         showHistorySuggestions();
@@ -564,7 +535,6 @@ public:
         }
     }
 
-    // Feature 3: Delete Word
     void deleteWord() {
         printHeader("DELETE WORD");
         string word = toLower(getLine("Enter word to delete: "));
@@ -585,7 +555,6 @@ public:
         }
     }
 
-    // Feature 4: Display All Words
     void displayAllWords() {
         printHeader("ALL WORDS  (A → Z)");
         if (bst.isEmpty()) {
@@ -597,14 +566,12 @@ public:
         for (const auto& e : words) printEntry(e);
     }
 
-    // Feature 5: Count Words
     void countWords() {
         printHeader("WORD COUNT");
         cout << "  Total words in dictionary: "
              << BOLD << CYAN << bst.wordCount() << RESET << "\n";
     }
 
-    // Feature 6: Auto-Complete  [FIX 1 applied — O(p+m)]
     void autoComplete() {
         printHeader("AUTO-COMPLETE");
         string prefix = toLower(getLine("Type a prefix (e.g. 'app'): "));
@@ -619,7 +586,6 @@ public:
         }
     }
 
-    // Feature 7: Edit Word
     void editWord(const string& preFilledWord = "") {
         printHeader("EDIT WORD");
         string word = preFilledWord.empty()
@@ -662,7 +628,6 @@ public:
         cout << GREEN << "\n  [✓] '" << word << "' updated successfully!\n" << RESET;
     }
 
-    // Feature 8: Search History
     void viewSearchHistory() {
         printHeader("SEARCH HISTORY");
         if (searchHistory.empty()) {
@@ -678,13 +643,10 @@ public:
                  << "  " << history[i] << "\n";
     }
 
-    // Feature 9: Save Dictionary
     void saveDictionary() { saveToFile(); }
 
-    // Feature 10: Load Dictionary
     void loadDictionary() { loadFromFile(); }
 
-    // Main Menu Loop
     void run() {
         int choice;
         bool isRunning = true;
@@ -698,7 +660,7 @@ public:
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 continue;
             }
-            cin.ignore(); // clear newline after integer input
+            cin.ignore();
 
             switch (choice) {
                 case 1:  addWord();           break;
@@ -727,7 +689,6 @@ public:
 // main()
 // ==========================================
 int main() {
-    // Enable UTF-8 output on Windows
     #ifdef _WIN32
     system("chcp 65001 > nul");
     #endif
