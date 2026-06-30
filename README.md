@@ -1,97 +1,149 @@
 # BST-Based Dictionary
 
-### A Console Application powered by Binary Search Tree | C++
+### A Production-Style Dictionary Application Powered by Binary Search Trees in C++
 
-**Vardhaman College of Engineering — CSE Department — Summer Project 2025–26**
-
----
-
-# Team
-
-## Team Lead
-- Rendla Vishnu Tej
-
-## Members
-- Araveti Harika
-- Paspula Akshith
-- Nagulapally Manideep
-- Sakinala Sanjitha
-
-## Mentor
-- Vechha Sai Riddhi
+Developed as part of the **Summer Project 2025–26** at **Vardhaman College of Engineering (VCEH), CSE Department**.
 
 ---
 
-# What is this?
+## Team
 
-A fully functional dictionary application that runs in the terminal.
+### Team Lead
 
-All word storage and retrieval is powered by a self-built Binary Search Tree (BST) implemented in C++.
+* Rendla Vishnu Tej
 
-The project demonstrates practical usage of Data Structures and File Handling concepts through a real-world console application.
+### Members
 
----
+* Araveti Harika
+* Paspula Akshith
+* Nagulapally Manideep
+* Sakinala Sanjitha
 
-# Features
+### Mentor
 
-1. Add Word — with definition, word type, synonyms, and phonetic
-2. Search Word — displays complete word details
-3. Delete Word — supports all 3 BST deletion cases
-4. Display All Words — alphabetical order using BST in-order traversal
-5. Count Total Words — shows total entries in dictionary
-6. Word Type — noun, verb, adjective, adverb, etc.
-7. Synonyms — related words shown during search
-8. Search History — recent searches stored using Stack
-9. Auto-Complete — instant suggestions using word prefix
-10. Save / Load — automatic file saving and loading
-11. Edit Word — modify definition, type, synonyms, or phonetic
-12. Duplicate Alert — warns if word already exists
-13. Spell Suggestion — suggests closest matching word
+* Vechha Sai Riddhi
 
 ---
 
-# Data Structures Used
+## Project Overview
 
-- Binary Search Tree (BST) — core storage and retrieval
-- Stack — search history management
+BST-Based Dictionary is a feature-rich console application built entirely in C++ that demonstrates how a classical data structure can be transformed into a practical software system.
+
+The application uses a custom implementation of a **Binary Search Tree (BST)** to efficiently manage dictionary entries while integrating additional features such as auto-complete, spell suggestions, search history, and persistent storage.
+
+The goal of the project was to move beyond textbook implementations and develop a production-style application using core Data Structures and Algorithms concepts.
 
 ---
 
-# File Structure
+## Features
+
+### Dictionary Operations
+
+* Add new words with:
+
+  * Definition
+  * Word Type
+  * Phonetic Representation
+  * Synonyms
+* Search for words
+* Edit existing entries
+* Delete words from the dictionary
+* Display all words in alphabetical order
+* Count total dictionary entries
+
+### Advanced Features
+
+* Prefix-based Auto-Complete Suggestions
+* Edit Distance based Spell Suggestions
+* Duplicate Entry Detection
+* Search History Tracking using Stack
+* Persistent File Storage
+* Automatic Data Loading on Startup
+* Automatic Data Saving on Exit
+* ANSI Styled Command Line Interface
+
+---
+
+## Data Structures Used
+
+### Binary Search Tree (BST)
+
+Used for:
+
+* Insertion
+* Searching
+* Deletion
+* Alphabetical Traversal
+* Prefix Search
+
+### Stack
+
+Used for:
+
+* Maintaining Recent Search History
+
+---
+
+## Algorithms Implemented
+
+* Binary Search Tree Insertion
+* Binary Search Tree Search
+* Binary Search Tree Deletion
+* In-order Traversal
+* Prefix-based Traversal for Auto-Complete
+* Edit Distance Algorithm for Spell Suggestions
+* Duplicate Detection Logic
+* Persistent File Storage using File Handling
+
+---
+
+## BST Deletion Cases Supported
+
+The application correctly handles all BST deletion scenarios:
+
+* Leaf Node Deletion
+* Single Child Deletion
+* Two Child Deletion using In-order Successor
+
+---
+
+## Repository Structure
 
 ```text
-dictionary/
-├── main.cpp
-├── BST.h
-├── BST.cpp
-├── Dictionary.h
-├── Dictionary.cpp
-├── dictionary.txt
-└── README.md
+BST-based-Dictionary/
+│
+├── Bst_core.cpp
+├── dictionary_data.txt
+├── README.md
+├── UML_Diagram.jpeg
+└── Structural_Data_Model.jpeg
 ```
 
 ---
 
-# How to Compile & Run
+## Compilation
 
-## Requirements
-- C++ Compiler (GCC / Code::Blocks / VS Code)
+### Requirements
 
-## Compile
+* GCC Compiler
+* g++ with C++17 support
+* Visual Studio Code / CodeBlocks / Any C++ IDE
+
+### Compile
 
 ```bash
-g++ -o dictionary main.cpp BST.cpp Dictionary.cpp
+g++ -std=c++17 -o dictionary Bst_core.cpp
 ```
 
-## Run
+### Run
 
-### Linux / Mac
+#### Linux / macOS
 
 ```bash
 ./dictionary
 ```
 
-### Windows
+#### Windows
 
 ```bash
 dictionary.exe
@@ -99,60 +151,87 @@ dictionary.exe
 
 ---
 
-# How the Application Works
+## Application Workflow
 
-1. The application starts and automatically loads saved dictionary data from file.
-2. User selects an operation from the menu.
-3. All operations are performed on the BST stored in memory.
-4. Before exiting, the dictionary is automatically saved to file.
-5. During the next launch, all previous data is restored.
-
----
-
-# Concepts Used
-
-- Binary Search Tree Operations
-  - Insertion
-  - Searching
-  - Deletion
-  - In-order Traversal
-
-- Stack Operations
-  - Push
-  - Pop
-  - Display History
-
-- File Handling
-  - Read from file
-  - Write to file
-
-- String Manipulation
-- Menu Driven Programming
-- Object-Oriented Programming in C++
+1. The application starts.
+2. Existing dictionary entries are automatically loaded from file.
+3. The user selects operations through a menu-driven interface.
+4. All operations are performed directly on the BST stored in memory.
+5. Before termination, the dictionary is automatically saved.
+6. During subsequent launches, all previously stored data is restored automatically.
 
 ---
 
-# Future Improvements
+## Sample Features Demonstrated
 
-- GUI version using Qt or Java Swing
-- User authentication system
-- Multiple dictionary support
-- Advanced spell checker
-- Word pronunciation audio
-- Export dictionary to PDF
+### Auto Complete
+
+```text
+Input:
+pro
+
+Output:
+procrastination
+progress
+programming
+project
+```
+
+### Spell Suggestion
+
+```text
+Input:
+procastination
+
+Output:
+Did you mean: procrastination?
+```
+
+### Persistent Storage
+
+```text
+Loaded 50 word(s) from dictionary_data.txt
+```
 
 ---
 
-# Sample Use Cases
+## Concepts Demonstrated
 
-- Student vocabulary learning
-- Mini offline dictionary
-- DSA project demonstration
-- BST operation visualization
-- File handling practice project
+* Data Structures
+* Algorithms
+* Object-Oriented Programming
+* Recursion
+* File Handling
+* Dynamic Memory Allocation
+* String Manipulation
+* STL Containers
+* Console UI Design
 
 ---
 
-# License
+## Future Improvements
 
-Academic Project — Vardhaman College of Engineering (2025–26)
+* AVL Tree Implementation for guaranteed O(log n) operations
+* Trie-based Auto-Complete System
+* GUI Version using Qt
+* Multi-language Dictionary Support
+* Audio Pronunciation Support
+* Cloud Synchronization
+* Export Dictionary to PDF
+
+---
+
+## Applications
+
+* Vocabulary Learning
+* Offline Dictionary System
+* DSA Demonstration Project
+* Educational Tool
+* File Handling Demonstration
+* BST Visualization and Learning
+
+---
+
+## License
+
+This repository is maintained for educational and academic purposes as part of the Summer Project initiative at Vardhaman College of Engineering during the academic year 2025–26.
