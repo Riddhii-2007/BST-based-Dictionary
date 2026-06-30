@@ -3,8 +3,7 @@
  *  BST-Based Dictionary  —  Vardhaman College of Engineering
  *  CSE Department  |  Summer Project 2025-26
  *
- *  CONTRIBUTOR : Araveti Harika
- *  ROLE        : BST Core Operations — Search, Insertion, Deletion
+ *  MODULE      : BST Core Operations — Search, Insertion, Deletion
  *  COMPLEXITY  : O(log n) average for all three operations
  * ============================================================
  *
@@ -19,8 +18,8 @@
  *         - deleteNode()         — Recursive delete (3 cases handled)
  *         - cloneSubtree()       — Deep copy for Rule-of-5
  *
- *  COMPILE : g++ -std=c++17 -Wall -o harika_bst harika_bst_core.cpp
- *  RUN     : ./harika_bst
+ *  COMPILE : g++ -std=c++17 -Wall -o bst_core bst_core.cpp
+ *  RUN     : ./bst_core
  * ============================================================
  */
 
@@ -77,7 +76,7 @@ string toLower(const string& s) {
  * @field phonetic    IPA / simplified phonetic string (optional).
  * @field synonyms    Related words, up to 10 (optional).
  *
- * Owner: Araveti Harika — this struct is the atom of every BST node.
+ * This struct is the atom of every BST node.
  */
 struct WordEntry {
     string         word;
@@ -108,7 +107,7 @@ struct Node {
 };
 
 // ============================================================
-//  BST CLASS  —  Primary Contribution by Araveti Harika
+//  BST CLASS  —  Core BST Module
 // ============================================================
 
 /**
@@ -368,7 +367,7 @@ public:
     bool isEmpty() const { return root == nullptr; }
 
     // ══════════════════════════════════════════════════════════
-    //  PUBLIC API — HARIKA'S THREE CORE OPERATIONS
+    //  PUBLIC API — CORE OPERATIONS
     // ══════════════════════════════════════════════════════════
 
     /**
@@ -440,7 +439,7 @@ int main() {
 
     // ── Insert ───────────────────────────────────────────────
     cout << Color::CYAN << Color::BOLD
-         << "\n  ══ HARIKA: BST Insert / Search / Delete Demo ══\n\n"
+         << "\n  ══ BST Core: Insert / Search / Delete Demo ══\n\n"
          << Color::RESET;
 
     auto addEntry = [&](const string& w, const string& def, const string& type) {
@@ -501,6 +500,6 @@ int main() {
     testSearch("Apple");      // should now miss
     testSearch("Compile");    // should still be found
 
-    cout << Color::CYAN << "\n  ══ End of Harika BST Demo ══\n\n" << Color::RESET;
+    cout << Color::CYAN << "\n  ══ End of BST Core Demo ══\n\n" << Color::RESET;
     return 0;
 }
